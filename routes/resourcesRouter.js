@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
     const resource = req.body;
 
     const resourceId = await db.addResource(resource);
-    res.status(200).json(resourceId);
+    res.status(201).json(resourceId);
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Couldnt add resource to database" })

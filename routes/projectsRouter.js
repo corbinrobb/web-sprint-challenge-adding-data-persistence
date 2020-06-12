@@ -26,7 +26,7 @@ router.post('/:id/resources', async (req, res) => {
     const projectId = req.params.id;
     const resourcesId = req.body.resource_id;
     const key = await db.addProjectResource(resourcesId, projectId);
-    res.status(200).json(key);
+    res.status(201).json(key);
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Couldnt add resource to project" })
@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
     const project = req.body;
 
     const projectId = await db.addProject(project);
-    res.status(200).json(projectId);
+    res.status(201).json(projectId);
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Couldnt add project to database" })
