@@ -1,10 +1,14 @@
 const db = require('../data/dbConfig.js');
+const { resource } = require('../server.js');
 
 module.exports = {
   addResource,
   getResources,
   addProject,
   getProjects,
+  getProjectResources,
+  getProjectTasks,
+  getProjectsByResource,
   addTask,
   getTasks
 }
@@ -36,3 +40,21 @@ async function getTasks() {
   return await db('tasks');
 }
 
+async function getProjectResources(project_id) {
+  return await db('project_resources')
+    .where({ project_id })
+    .join('resources', 'resources.id', '=', 'project_resources.resource_id')
+    .select('resources.id', 'resources.name', 'resources.description' )
+}
+
+async function getProjectTasks(project_id) {
+  return await db('tasks')
+    .where({ project_id })
+}
+
+async function getProjectsByResource(resource_id) {
+  return await db('project_resources')
+    .where({ resource_id })
+    .join('projects', 'projects.id', '=', 'project_resources.project_id')
+    .select('projects.id', 'projects.name', 'projects.description', 'projects.completed')
+}

@@ -11,6 +11,26 @@ router.get('/projects', async (req, res) => {
   }
 })
 
+router.get('/projects/:id/resources', async (req, res) => {
+  try {
+    const resources = await db.getProjectResources(req.params.id);
+    res.status(200).json(resources);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Couldnt retrieve project resources from database" })
+  }
+})
+
+router.get('/projects/:id/tasks', async (req, res) => {
+  try {
+    const tasks = await db.getProjectTasks(req.params.id);
+    res.status(200).json(tasks);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Couldnt retrieve project tasks from database" })
+  }
+})
+
 router.get('/resources', async (req, res) => {
   try {
     const resources = await db.getResources();
@@ -18,6 +38,16 @@ router.get('/resources', async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Couldnt retrieve resources from database" })
+  }
+})
+
+router.get('/resources/:id/projects', async (req, res) => {
+  try {
+    const projects = await db.getProjectsByResource(req.params.id);
+    res.status(200).json(projects);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Couldnt retrieve projects from database" })
   }
 })
 
