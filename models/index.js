@@ -1,5 +1,4 @@
 const db = require('../data/dbConfig.js');
-const { resource } = require('../server.js');
 
 module.exports = {
   addResource,
@@ -37,7 +36,9 @@ async function addTask(task) {
 }
 
 async function getTasks() {
-  return await db('tasks');
+  return await db('tasks')
+    .join('projects', 'projects.id', '=', 'tasks.project_id')
+    .select('tasks.id', 'tasks.description', 'tasks.notes', 'tasks.completed', 'tasks.project_id', 'projects.name as project_name', 'projects.description as project_description')
 }
 
 async function getProjectResources(project_id) {
