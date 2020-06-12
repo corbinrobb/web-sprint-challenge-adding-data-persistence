@@ -21,6 +21,18 @@ router.get('/:id/resources', async (req, res) => {
   }
 })
 
+router.post('/:id/resources', async (req, res) => {
+  try {
+    const projectId = req.params.id;
+    const resourcesId = req.body.resource_id;
+    const key = await db.addProjectResource(resourcesId, projectId);
+    res.status(200).json(key);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Couldnt add resource to project" })
+  }
+})
+
 router.get('/:id/tasks', async (req, res) => {
   try {
     const tasks = await db.getProjectTasks(req.params.id);

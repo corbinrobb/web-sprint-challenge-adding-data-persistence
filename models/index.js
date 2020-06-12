@@ -6,6 +6,7 @@ module.exports = {
   addProject,
   getProjects,
   getProjectResources,
+  addProjectResource,
   getProjectTasks,
   getProjectsByResource,
   addTask,
@@ -58,4 +59,9 @@ async function getProjectsByResource(resource_id) {
     .where({ resource_id })
     .join('projects', 'projects.id', '=', 'project_resources.project_id')
     .select('projects.id', 'projects.name', 'projects.description', 'projects.completed')
+}
+
+async function addProjectResource(resource_id, project_id) {
+  return await db('project_resources')
+    .insert({ resource_id, project_id });
 }
