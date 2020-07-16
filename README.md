@@ -48,11 +48,19 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 1. Explain the difference between `Relational Databases` and `SQL`.
 
+SQL is a language used to retrieve and manipulate data from databases and relational databases are just storage systems for data.
+
 2. Why do tables need a `primary key`?
+
+Tables need a primary key so that it is easy to find and manipulate specific data from that table without affecting the other rows in the table. They also serve the purpose of being an id for the data and allowing the ability to have relationships with other tables by way of references.
 
 3. What is the name given to a table column that references the primary key on another table.
 
+A Foreign Key or a reference id.
+
 4. What do we need in order to have a _many to many_ relationship between two tables.
+
+We need to have appropriate data modeling where there isn’t duplicated data and there are correct primary keys and reference ids.
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 
